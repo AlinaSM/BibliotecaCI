@@ -53,3 +53,12 @@ $routes->get('/', 'Home::index');
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+$routes->get('libros/listar', 'Libros::index');
+$routes->get('libros/crear', 'Libros::crear');
+$routes->post('libros/guardar', 'Libros::guardar');
+$routes->get('libro/eliminar/(:num)', 'Libros::eliminar/$1');
+$routes->get('libro/editar/(:num)', 'Libros::editar/$1');
+$routes->post('libro/actualizar', 'Libros::actualizar');
+
+
+
