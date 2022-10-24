@@ -1,5 +1,11 @@
 <?= $cabecera; ?>
 
+<?php if(session('mensaje')){ ?>
+    <div class="alert alert-danger" role="alert">
+        <h5><?= session('mensaje') ?></h5>
+    </div>
+<?php } ?>
+
 <a href="<?= base_url('/libros/listar') ?>"></a>
 <div>
     <h2>Form crear libro</h2>

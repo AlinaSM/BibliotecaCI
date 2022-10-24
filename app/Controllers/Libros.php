@@ -22,6 +22,20 @@ class Libros extends Controller{
     }
 
     public function guardar(){
+        $validation = $this->validate([
+            'nombre' => 'required|min_length[3]',
+            'imagen' => [
+                'uploaded[imagen]',
+                'mime_in[imagen,image/jpg,image/png,image/jpeg]',
+                'max_size[imagen,1024]',
+            ],
+        ]);
+
+        if(!$validation){
+            $session = session(); 
+            $session->setFlashData('mensaje', 'Registrar todos los campos'); 
+            return redirect()->back()->withInput();
+        }
 
         if($img = $this->request->getFile('imagen')){
             $nuevoNombreImg = $img->getRandomName();
@@ -63,7 +77,19 @@ class Libros extends Controller{
     }
 
     public function actualizar(){
+        
+        $validation = $this->validate([
+            'nombre' => 'required|min_length[3]',
+        ]);
+
+        if(!$validation){
+            $session = session(); 
+            $session->setFlashData('mensaje', 'Registrar todos los campos'); 
+            return redirect()->back()->withInput();
+        }
+        
         $libro = new Libro();
+
         $datos = [
             'name' => $this->request->getVar('nombre'),
         ];
